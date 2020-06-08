@@ -1,0 +1,15 @@
+  
+node {
+    def imageTag = "seleniumbase-jenkins-tests:${env.BUILD_NUMBER}"
+
+    stage("Initializing") {
+        checkout scm;
+        sh 'git reset --hard'
+    }
+
+    stage("Running Tests") {
+        try {
+            sh "pytest --headless"
+        } 
+    }
+}
