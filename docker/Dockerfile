@@ -16,12 +16,8 @@ ENV DISPLAY=:99
 
 # Requirements
 RUN mkdir -p /app/report
-RUN mkdir -p /app/downloaded_files
 COPY requirements.txt /app/
-COPY conftest.py /app/
-COPY pytest.ini /app/
 COPY docker/run-tests.sh /app/docker/
-COPY docker/modules /app/docker/
 
 COPY tests /app/tests/
 WORKDIR /app
