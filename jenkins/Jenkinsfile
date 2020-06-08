@@ -1,0 +1,24 @@
+  
+node {
+    def imageTag = "seleniumbase-jenkins-tests:${env.BUILD_NUMBER}"
+
+    stage("Initializing") {
+        checkout scm;
+        sh 'git reset --hard'
+    }
+
+    stage("Building Images") {
+        sh "docker build -t ${imageTag} -f docker/Dockerfile ."
+    }
+
+    stage("Running Tests") {
+        try {
+            sh "jenkins/run-tests-selenium.sh ${env.BUILD_NUMBER}"
+        } 
+        finally {
+            stage('Remove docker image') {
+                sh "docker rmi ${imageTag}"
+            }
+        }
+    }
+}
