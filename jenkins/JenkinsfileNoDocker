@@ -8,8 +8,6 @@ node {
     }
 
     stage("Running Tests") {
-        try {
-            sh "pytest --headless"
-        } 
+        sh "pytest --headless"
     }
 }
