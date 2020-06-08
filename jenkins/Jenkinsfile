@@ -1,6 +1,8 @@
   
 node {
     def imageTag = "seleniumbase-jenkins-tests:${env.BUILD_NUMBER}"
+    def dockerHome = tool 'myDocker'
+    env.PATH = "${dockerHome}/bin:${env.PATH}"
 
     stage("Initializing") {
         checkout scm;
